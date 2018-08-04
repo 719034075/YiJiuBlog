@@ -165,7 +165,7 @@ class Info(Resource):
             current_user = User.query.filter_by(username=jwt_user).first()
             response = ResponseBean().get_success_instance()
             response.message = '获取用户信息成功'
-            response.data['roles'] = current_user.roles
+            response.data['roles'] = [current_user.roles]
             response.data['name'] = current_user.username
             response.data['avatar'] = current_user.avatar
             return response.__dict__
