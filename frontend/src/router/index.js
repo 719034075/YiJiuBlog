@@ -49,5 +49,18 @@ export default new Router({
 })
 
 export const asyncRouterMap = [
+    {
+        path: '/markdown',
+        component: Layout,
+        redirect: 'noredirect',
+        name: 'markdown',
+        meta: {
+            title: 'markdown',
+            icon: 'markdown'
+        },
+        children:[
+            { path: 'markdown', component: () => import('@/views/markdown/markdown'), name: 'markdown-create', meta: { title: 'markdown',icon: 'markdown' }},
+        ]
+    }
 
 ];
