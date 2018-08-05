@@ -1,7 +1,8 @@
 from flask import Flask, render_template
 from config.dev_config import DevConfig
 from extensions import db, cors, jwt, swagger
-from user.controllers import user
+from apps.user.controllers import user
+from apps.blog.controllers import blog
 
 
 def create_app():
@@ -15,6 +16,7 @@ def create_app():
 
     # Register blueprint
     app.register_blueprint(user)
+    app.register_blueprint(blog)
 
     # Init the extensions' app
     db.init_app(app)
