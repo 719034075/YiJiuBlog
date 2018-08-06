@@ -62,6 +62,7 @@ export default {
       // hideIcons: ['guide', 'heading', 'quote', 'image', 'preview', 'side-by-side', 'fullscreen'],
       placeholder: this.placeholder
     });
+
     if (this.value) {
       this.simplemde.value(this.value)
     }

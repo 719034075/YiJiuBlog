@@ -1,4 +1,4 @@
-from user.models import User
+from apps.user.models import User
 
 user = User.query.filter_by(username='admin').first()
 

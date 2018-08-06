@@ -1,7 +1,7 @@
 from functools import wraps
 from flask_jwt_extended import get_jwt_identity
 from .response_bean import ResponseBean
-from user.models import User
+from apps.user.models import User
 
 
 def requires_roles(*roles):

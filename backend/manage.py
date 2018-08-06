@@ -6,7 +6,7 @@ from flask_migrate import Migrate, MigrateCommand
 from run import app
 from extensions import db
 
-from user.models import User
+from apps.user.models import User
 
 # init manager object via app object
 manager = Manager(app)
