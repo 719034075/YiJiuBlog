@@ -353,7 +353,7 @@ class FindByConditions(Resource):
 
 
 api.add_resource(Create, '/create')
-api.add_resource(DeleteById, '/delete-by-id/<str:id>')
+api.add_resource(DeleteById, '/delete-by-id/<string:id>')
 api.add_resource(Edit, '/edit')
-api.add_resource(FindById, '/find-by-id/<str:id>')
+api.add_resource(FindById, '/find-by-id/<string:id>')
 api.add_resource(FindByConditions, '/find-by-conditions')
