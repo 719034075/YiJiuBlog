@@ -158,7 +158,7 @@ class Info(Resource):
                   default:
                     roles: superuser
                     name: temp-admin
-                    avatar: null
+                    avatar: nope
          """
         jwt_user = get_jwt_identity()
         if jwt_user:
