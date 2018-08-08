@@ -1,10 +1,10 @@
 from datetime import datetime
 from flask import Blueprint
 from flask_restful import Resource, Api, reqparse
-from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity, jwt_optional, get_raw_jwt
+from flask_jwt_extended import jwt_required
 from utils.response_bean import ResponseBean
 from utils.protect_restful import requires_roles
-from extensions import jwt, db
+from extensions import db
 from .models import Blog
 
 blog = Blueprint('blog', __name__,
@@ -16,7 +16,6 @@ api = Api(blog)
 class Create(Resource):
     def __init__(self):
         self.parser = reqparse.RequestParser()
-        self.parser.add_argument('author', type=str, location='json', required=True)
         self.parser.add_argument('title', type=str, location='json', required=True)
         self.parser.add_argument('abstract', type=str, location='json')
         self.parser.add_argument('context', type=str, location='json')
@@ -36,12 +35,8 @@ class Create(Resource):
                     schema:
                        type: object
                        required:
-                         - author
                          - title
                        properties:
-                         author:
-                           type: string
-                           default: temp-admin
                          title:
                            type: string
                            default: temp-title
@@ -67,15 +62,9 @@ class Create(Resource):
 
                  """
         args = self.parser.parse_args()
-        author = args['author']
         title = args['title']
         abstract = args['abstract']
         context = args['context']
-
-        if not author:
-            response = ResponseBean().get_fail_instance()
-            response.message = '作者为空'
-            return response.__dict__
 
         if not title:
             response = ResponseBean().get_fail_instance()
@@ -83,7 +72,7 @@ class Create(Resource):
             return response.__dict__
 
         now_time = datetime.now()
-        new_blog = Blog(title=title, author=author, abstract=abstract, context=context, create_time=now_time,
+        new_blog = Blog(title=title, abstract=abstract, context=context, create_time=now_time,
                         update_time=now_time)
         db.session.add(new_blog)
         db.session.commit()
@@ -141,7 +130,6 @@ class Edit(Resource):
     def __init__(self):
         self.parser = reqparse.RequestParser()
         self.parser.add_argument('id', type=str, location='json', required=True)
-        self.parser.add_argument('author', type=str, location='json', required=True)
         self.parser.add_argument('title', type=str, location='json', required=True)
         self.parser.add_argument('abstract', type=str, location='json')
         self.parser.add_argument('context', type=str, location='json')
@@ -161,14 +149,10 @@ class Edit(Resource):
                     schema:
                        type: object
                        required:
-                         - author
                          - title
                        properties:
                          id:
                            type: string
-                         author:
-                           type: string
-                           default: temp-admin
                          title:
                            type: string
                            default: temp-title
@@ -195,7 +179,6 @@ class Edit(Resource):
                  """
         args = self.parser.parse_args()
         id = args['id']
-        author = args['author']
         title = args['title']
         abstract = args['abstract']
         context = args['context']
@@ -205,18 +188,12 @@ class Edit(Resource):
             response.message = 'Id为空'
             return response.__dict__
 
-        if not author:
-            response = ResponseBean().get_fail_instance()
-            response.message = '作者为空'
-            return response.__dict__
-
         if not title:
             response = ResponseBean().get_fail_instance()
             response.message = '标题为空'
             return response.__dict__
 
         edit_blog = Blog.query.filter_by(id=id).first()
-        edit_blog.author = author
         edit_blog.title = title
         edit_blog.abstract = abstract
         edit_blog.context = context
@@ -261,7 +238,6 @@ class FindById(Resource):
                             default:
                                 id: temp-id
                                 title: temp-title
-                                author: temp-author
                                 abstract:temp-abstract
                                 context: temp-context
                                 create_time: temp-time
@@ -277,7 +253,6 @@ class FindById(Resource):
         response.message = '查询Blog成功'
         response.data['id'] = find_blog.id
         response.data['title'] = find_blog.title
-        response.data['author'] = find_blog.author
         response.data['abstract'] = find_blog.abstract
         response.data['context'] = find_blog.context
         response.data['create_time'] = find_blog.create_time
@@ -306,12 +281,8 @@ class FindByConditions(Resource):
                     schema:
                        type: object
                        required:
-                         - author
                          - title
                        properties:
-                         author:
-                           type: string
-                           default: temp-admin
                          title:
                            type: string
                            default: temp-title
