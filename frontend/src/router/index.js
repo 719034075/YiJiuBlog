@@ -61,6 +61,22 @@ export const asyncRouterMap = [
         children:[
             { path: 'markdown', component: () => import('@/views/markdown/markdown'), name: 'markdown-create', meta: { title: 'markdown',icon: 'markdown' }},
         ]
-    }
+    },
+
+    {
+        path: '/blog',
+        component: Layout,
+        redirect: '/blog/list',
+        name: 'blog',
+        meta: {
+            title: '文章栏',
+            icon: 'blog'
+        },
+        children: [
+            { path: 'create', component: () => import('@/views/blog/create'), name: 'createArticle', meta: { title: '创建文章', icon: 'edit' }},
+            { path: 'edit/:id(\\d+)', component: () => import('@/views/blog/edit'), name: 'editArticle', meta: { title: '编辑文章', noCache: true }, hidden: true },
+            { path: 'list', component: () => import('@/views/blog/list'), name: 'articleList', meta: { title: '文章列表', icon: 'list' }}
+        ]
+    },
 
 ];

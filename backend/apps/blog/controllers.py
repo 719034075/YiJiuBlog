@@ -18,6 +18,7 @@ class Create(Resource):
         self.parser = reqparse.RequestParser()
         self.parser.add_argument('author', type=str, location='json', required=True)
         self.parser.add_argument('title', type=str, location='json', required=True)
+        self.parser.add_argument('abstract', type=str, location='json')
         self.parser.add_argument('context', type=str, location='json')
 
     @jwt_required
@@ -44,6 +45,9 @@ class Create(Resource):
                          title:
                            type: string
                            default: temp-title
+                         abstract:
+                           type: string
+                           default: temp-abstract
                          context:
                            type: string
                            default: temp-context
@@ -65,6 +69,7 @@ class Create(Resource):
         args = self.parser.parse_args()
         author = args['author']
         title = args['title']
+        abstract = args['abstract']
         context = args['context']
 
         if not author:
@@ -78,7 +83,8 @@ class Create(Resource):
             return response.__dict__
 
         now_time = datetime.now()
-        new_blog = Blog(title=title, author=author, context=context, create_time=now_time, update_time=now_time)
+        new_blog = Blog(title=title, author=author, abstract=abstract, context=context, create_time=now_time,
+                        update_time=now_time)
         db.session.add(new_blog)
         db.session.commit()
 
@@ -137,6 +143,7 @@ class Edit(Resource):
         self.parser.add_argument('id', type=str, location='json', required=True)
         self.parser.add_argument('author', type=str, location='json', required=True)
         self.parser.add_argument('title', type=str, location='json', required=True)
+        self.parser.add_argument('abstract', type=str, location='json')
         self.parser.add_argument('context', type=str, location='json')
 
     @jwt_required
@@ -165,6 +172,9 @@ class Edit(Resource):
                          title:
                            type: string
                            default: temp-title
+                         abstract:
+                           type: string
+                           default: temp-abstract
                          context:
                            type: string
                            default: temp-context
@@ -187,6 +197,7 @@ class Edit(Resource):
         id = args['id']
         author = args['author']
         title = args['title']
+        abstract = args['abstract']
         context = args['context']
 
         if not id:
@@ -207,6 +218,7 @@ class Edit(Resource):
         edit_blog = Blog.query.filter_by(id=id).first()
         edit_blog.author = author
         edit_blog.title = title
+        edit_blog.abstract = abstract
         edit_blog.context = context
         edit_blog.update_time = datetime.now()
         db.session.commit()
@@ -250,6 +262,7 @@ class FindById(Resource):
                                 id: temp-id
                                 title: temp-title
                                 author: temp-author
+                                abstract:temp-abstract
                                 context: temp-context
                                 create_time: temp-time
                                 update_time: temp-time
@@ -265,6 +278,7 @@ class FindById(Resource):
         response.data['id'] = find_blog.id
         response.data['title'] = find_blog.title
         response.data['author'] = find_blog.author
+        response.data['abstract'] = find_blog.abstract
         response.data['context'] = find_blog.context
         response.data['create_time'] = find_blog.create_time
         response.data['update_time'] = find_blog.update_time
