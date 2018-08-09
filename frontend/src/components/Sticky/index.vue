@@ -34,15 +34,15 @@ export default {
     }
   },
   mounted() {
-    this.height = this.$el.getBoundingClientRect().height
-    window.addEventListener('scroll', this.handleScroll)
+    this.height = this.$el.getBoundingClientRect().height;
+    window.addEventListener('scroll', this.handleScroll);
     window.addEventListener('resize', this.handleReize)
   },
   activated() {
     this.handleScroll()
   },
   destroyed() {
-    window.removeEventListener('scroll', this.handleScroll)
+    window.removeEventListener('scroll', this.handleScroll);
     window.removeEventListener('resize', this.handleReize)
   },
   methods: {
@@ -50,25 +50,25 @@ export default {
       if (this.active) {
         return
       }
-      this.position = 'fixed'
-      this.active = true
-      this.width = this.width + 'px'
+      this.position = 'fixed';
+      this.active = true;
+      this.width = this.width + 'px';
       this.isSticky = true
     },
     reset() {
       if (!this.active) {
         return
       }
-      this.position = ''
-      this.width = 'auto'
-      this.active = false
+      this.position = '';
+      this.width = 'auto';
+      this.active = false;
       this.isSticky = false
     },
     handleScroll() {
-      this.width = this.$el.getBoundingClientRect().width
-      const offsetTop = this.$el.getBoundingClientRect().top
+      this.width = this.$el.getBoundingClientRect().width;
+      const offsetTop = this.$el.getBoundingClientRect().top;
       if (offsetTop < this.stickyTop) {
-        this.sticky()
+        this.sticky();
         return
       }
       this.reset()
