@@ -1,0 +1,11 @@
+[Unit]
+Description=Gunicorn instance to serve backend
+After=network.target
+
+[Service]
+WorkingDirectory=/home/YiJiuBlog/backend
+Environment="PYTHONPATH=/home/YiJiuBlog/backend/venv/bin"
+ExecStart=/home/YiJiuBlog/backend/venv/bin/gunicorn --workers 3 --bind unix:backend.sock -m 001 wsgi:app
+
+[Install]
+WantedBy=multi-user.target
