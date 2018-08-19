@@ -1,7 +1,10 @@
+import time
 from datetime import datetime
 from flask import Blueprint
 from flask_restful import Resource, Api, reqparse
 from flask_jwt_extended import jwt_required
+
+from utils.json_serialize import list_json_serialize
 from utils.response_bean import ResponseBean
 from utils.protect_restful import requires_roles
 from extensions import db
@@ -18,7 +21,7 @@ class Create(Resource):
         self.parser = reqparse.RequestParser()
         self.parser.add_argument('title', type=str, location='json', required=True)
         self.parser.add_argument('abstract', type=str, location='json')
-        self.parser.add_argument('context', type=str, location='json')
+        self.parser.add_argument('content', type=str, location='json')
 
     @jwt_required
     @requires_roles('superuser')
@@ -43,9 +46,9 @@ class Create(Resource):
                          abstract:
                            type: string
                            default: temp-abstract
-                         context:
+                         content:
                            type: string
-                           default: temp-context
+                           default: temp-content
                 responses:
                   200:
                     description: 无
@@ -64,7 +67,7 @@ class Create(Resource):
         args = self.parser.parse_args()
         title = args['title']
         abstract = args['abstract']
-        context = args['context']
+        content = args['content']
 
         if not title:
             response = ResponseBean().get_fail_instance()
@@ -72,7 +75,7 @@ class Create(Resource):
             return response.__dict__
 
         now_time = datetime.now()
-        new_blog = Blog(title=title, abstract=abstract, context=context, create_time=now_time,
+        new_blog = Blog(title=title, abstract=abstract, content=content, create_time=now_time,
                         update_time=now_time)
         db.session.add(new_blog)
         db.session.commit()
@@ -132,7 +135,7 @@ class Edit(Resource):
         self.parser.add_argument('id', type=str, location='json', required=True)
         self.parser.add_argument('title', type=str, location='json', required=True)
         self.parser.add_argument('abstract', type=str, location='json')
-        self.parser.add_argument('context', type=str, location='json')
+        self.parser.add_argument('content', type=str, location='json')
 
     @jwt_required
     @requires_roles('superuser')
@@ -159,9 +162,9 @@ class Edit(Resource):
                          abstract:
                            type: string
                            default: temp-abstract
-                         context:
+                         content:
                            type: string
-                           default: temp-context
+                           default: temp-content
                 responses:
                   200:
                     description: 无
@@ -181,7 +184,7 @@ class Edit(Resource):
         id = args['id']
         title = args['title']
         abstract = args['abstract']
-        context = args['context']
+        content = args['content']
 
         if not id:
             response = ResponseBean().get_fail_instance()
@@ -196,7 +199,7 @@ class Edit(Resource):
         edit_blog = Blog.query.filter_by(id=id).first()
         edit_blog.title = title
         edit_blog.abstract = abstract
-        edit_blog.context = context
+        edit_blog.content = content
         edit_blog.update_time = datetime.now()
         db.session.commit()
 
@@ -239,7 +242,7 @@ class FindById(Resource):
                                 id: temp-id
                                 title: temp-title
                                 abstract:temp-abstract
-                                context: temp-context
+                                content: temp-content
                                 create_time: temp-time
                                 update_time: temp-time
                   """
@@ -254,9 +257,9 @@ class FindById(Resource):
         response.data['id'] = find_blog.id
         response.data['title'] = find_blog.title
         response.data['abstract'] = find_blog.abstract
-        response.data['context'] = find_blog.context
-        response.data['create_time'] = find_blog.create_time
-        response.data['update_time'] = find_blog.update_time
+        response.data['content'] = find_blog.content
+        response.data['create_time'] = time.mktime(find_blog.create_time.timetuple()) * 1000
+        response.data['update_time'] = time.mktime(find_blog.update_time.timetuple()) * 1000
         return response.__dict__
 
 
@@ -333,7 +336,7 @@ class FindByConditions(Resource):
         response = ResponseBean().get_success_instance()
         response.message = '查找Blog成功'
         response.data['total'] = blogs.pages
-        response.data['results'] = blogs.items
+        response.data['results'] = list_json_serialize(blogs.items)
         return response.__dict__
 
 

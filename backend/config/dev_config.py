@@ -10,6 +10,7 @@ class DevConfig(BaseConfig):
     # MySQL connection
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:center135@localhost:3306/yijiublog'
+    SQLALCHEMY_NATIVE_UNICODE = 'utf8'
 
     # Safe settings
     JWT_SECRET_KEY = 'How are you?I am fine, thank you!'

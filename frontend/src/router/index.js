@@ -50,20 +50,6 @@ export default new Router({
 
 export const asyncRouterMap = [
     {
-        path: '/markdown',
-        component: Layout,
-        redirect: 'noredirect',
-        name: 'markdown',
-        meta: {
-            title: 'markdown',
-            icon: 'markdown'
-        },
-        children:[
-            { path: 'markdown', component: () => import('@/views/markdown/markdown'), name: 'markdown-create', meta: { title: 'markdown',icon: 'markdown' }},
-        ]
-    },
-
-    {
         path: '/blog',
         component: Layout,
         redirect: '/blog/list',
@@ -74,8 +60,9 @@ export const asyncRouterMap = [
         },
         children: [
             { path: 'create', component: () => import('@/views/blog/create'), name: 'createArticle', meta: { title: '创建文章', icon: 'edit' }},
-            { path: 'edit/:id(\\d+)', component: () => import('@/views/blog/edit'), name: 'editArticle', meta: { title: '编辑文章', noCache: true }, hidden: true },
-            { path: 'list', component: () => import('@/views/blog/list'), name: 'articleList', meta: { title: '文章列表', icon: 'list' }}
+            { path: 'edit/:id', component: () => import('@/views/blog/edit'), name: 'editArticle', meta: { title: '编辑文章', noCache: true }, hidden: true },
+            { path: 'list', component: () => import('@/views/blog/list'), name: 'articleList', meta: { title: '文章列表', icon: 'list' }},
+            { path: 'view/:id', component: () => import('@/views/blog/view'), name: 'viewArticle', meta: { title: '查看文章', noCache: true }, hidden: true },
         ]
     },
 
