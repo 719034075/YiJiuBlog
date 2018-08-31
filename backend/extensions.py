@@ -4,7 +4,7 @@ from flask_cors import CORS
 from flask_restful import Api
 from flask_httpauth import HTTPBasicAuth
 from flask_jwt_extended import JWTManager
-from flasgger import Swagger
+# from flasgger import Swagger
 
 # Create the Flask-SQLAlchemy's instance
 db = SQLAlchemy()
@@ -25,4 +25,4 @@ auth = HTTPBasicAuth()
 jwt = JWTManager()
 
 # Create the flasgger's instance
-swagger = Swagger()
+# swagger = Swagger()

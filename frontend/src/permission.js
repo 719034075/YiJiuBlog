@@ -12,7 +12,7 @@ function hasPermission(roles, permissionRoles) {
 }
 
 
-const whiteList = ['/login']; // 不重定向白名单
+const whiteList = ['/homepage','/blog','/login']; // 不重定向白名单
 router.beforeEach((to, from, next) => {
     NProgress.start();
     if (getToken()) {
@@ -41,7 +41,7 @@ router.beforeEach((to, from, next) => {
         if (whiteList.indexOf(to.path) !== -1) {
             next()
         } else {
-            next('/login');
+            next('/homepage');
             NProgress.done()
         }
     }

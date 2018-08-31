@@ -5,7 +5,7 @@
 </template>
 
 <script>
-    import { fetchArticle } from '@/api/blog'
+    import { fetchArticle } from '@/api/article'
 
     export default {
         name: "view",

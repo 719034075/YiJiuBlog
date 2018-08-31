@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { fetchList } from '@/api/blog'
+import { fetchList } from '@/api/article'
 
 export default {
   name: 'articleList',

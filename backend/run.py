@@ -1,8 +1,9 @@
 from flask import Flask, render_template
 from config.dev_config import DevConfig
-from extensions import db, cors, jwt, swagger
+from extensions import db, cors, jwt
 from apps.user.controllers import user
-from apps.blog.controllers import blog
+from apps.article.controllers import article
+from apps.catalog.controllers import catalog
 
 
 def create_app():
@@ -16,13 +17,14 @@ def create_app():
 
     # Register blueprint
     app.register_blueprint(user)
-    app.register_blueprint(blog)
+    app.register_blueprint(article)
+    app.register_blueprint(catalog)
 
     # Init the extensions' app
     db.init_app(app)
     cors.init_app(app)
     jwt.init_app(app)
-    swagger.init_app(app)
+    # swagger.init_app(app)
 
     # Page jump
     @app.route('/', defaults={'path': ''})

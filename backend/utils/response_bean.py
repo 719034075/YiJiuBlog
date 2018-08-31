@@ -14,3 +14,4 @@ class ResponseBean:
         self.message = ''
         self.data = {}
         return self
+

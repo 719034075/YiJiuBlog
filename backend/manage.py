@@ -7,6 +7,7 @@ from run import app
 from extensions import db
 
 from apps.user.models import User
+from apps.catalog.models import Catalog
 
 # init manager object via app object
 manager = Manager(app)
@@ -43,6 +44,14 @@ def initrole():
     db.session.add(User(username="temp-admin", password="temp-pwd", roles='superuser'))
     db.session.commit()
     print("Roles added!")
+
+
+# 初始化数据库
+@manager.command
+def initdb():
+    db.session.add(Catalog(name='默认'))
+    db.session.commit()
+    print("Catalog added!")
 
 
 if __name__ == '__main__':

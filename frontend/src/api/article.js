@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function fetchList(data) {
     return request({
-        url: '/blog/find-by-conditions',
+        url: '/article/list/all',
         method: 'post',
         data
     })
@@ -10,7 +10,7 @@ export function fetchList(data) {
 
 export function fetchArticle(id) {
     return request({
-        url: `/blog/find-by-id/${id}`,
+        url: `/article/detail/${id}`,
         method: 'get',
     })
 }
@@ -25,7 +25,7 @@ export function fetchPv(pv) {
 
 export function createArticle(data) {
     return request({
-        url: '/blog/create',
+        url: '/article/create',
         method: 'post',
         data
     })
@@ -33,8 +33,15 @@ export function createArticle(data) {
 
 export function updateArticle(data) {
     return request({
-        url: '/blog/edit',
+        url: '/article/update',
         method: 'post',
         data
     })
+}
+
+export function deleteArticle(id){
+  return request({
+    url: `/article/delete/${id}`,
+    method: 'get',
+  })
 }

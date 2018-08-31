@@ -22,6 +22,8 @@ import Layout from '../views/layout/Layout'
   }
  **/
 export const constantRouterMap = [
+    { path: '/homepage', component: () => import('@/views/homepage/index'), hidden: true },
+    { path: '/blog', component: () => import('@/views/blog/index'), hidden: true },
     { path: '/login', component: () => import('@/views/login/index'), hidden: true },
     { path: '/404', component: () => import('@/views/404'), hidden: true },
 
@@ -50,19 +52,19 @@ export default new Router({
 
 export const asyncRouterMap = [
     {
-        path: '/blog',
+        path: '/article',
         component: Layout,
-        redirect: '/blog/list',
-        name: 'blog',
+        redirect: '/article/list',
+        name: 'article',
         meta: {
             title: '文章栏',
-            icon: 'blog'
+            icon: 'article'
         },
         children: [
-            { path: 'create', component: () => import('@/views/blog/create'), name: 'createArticle', meta: { title: '创建文章', icon: 'edit' }},
-            { path: 'edit/:id', component: () => import('@/views/blog/edit'), name: 'editArticle', meta: { title: '编辑文章', noCache: true }, hidden: true },
-            { path: 'list', component: () => import('@/views/blog/list'), name: 'articleList', meta: { title: '文章列表', icon: 'list' }},
-            { path: 'view/:id', component: () => import('@/views/blog/view'), name: 'viewArticle', meta: { title: '查看文章', noCache: true }, hidden: true },
+            { path: 'create', component: () => import('@/views/article/create'), name: 'createArticle', meta: { title: '创建文章', icon: 'edit' }},
+            { path: 'edit/:id', component: () => import('@/views/article/edit'), name: 'editArticle', meta: { title: '编辑文章', noCache: true }, hidden: true },
+            { path: 'list', component: () => import('@/views/article/list'), name: 'articleList', meta: { title: '文章列表', icon: 'list' }},
+            { path: 'view/:id', component: () => import('@/views/article/view'), name: 'viewArticle', meta: { title: '查看文章', noCache: true }, hidden: true },
         ]
     },
 
