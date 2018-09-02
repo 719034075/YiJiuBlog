@@ -112,14 +112,13 @@ class Detail(Resource):
     @requires_roles('superuser')
     def get(self, id):
         find_article = Article.query.get(id)
-        find_catalog = Catalog.query.get(find_article.catalog)
 
         response = ResponseBean().get_success_instance()
         response.message = '查询Article成功'
         response.data['id'] = find_article.id
         response.data['title'] = find_article.title
         response.data['author'] = find_article.author
-        response.data['catalog'] = find_catalog.name
+        response.data['catalog'] = find_article.catalog
         response.data['abstract'] = find_article.abstract
         response.data['content'] = find_article.content
         response.data['create_time'] = time.mktime(find_article.create_time.timetuple()) * 1000
@@ -143,6 +142,9 @@ class ListAll(Resource):
         page_size = args['page_size']
 
         articles = Article.query.order_by(Article.create_time).paginate(page, page_size)
+        for item in articles.items:
+            catalog = Catalog.query.get(item.catalog)
+            item.catalog = catalog.name
 
         response = ResponseBean().get_success_instance()
         response.message = '查找Articles成功'

@@ -3,41 +3,15 @@
 
     <el-table :data="list" v-loading.body="listLoading" border fit highlight-current-row style="width: 100%">
 
-      <el-table-column min-width="300px" label="标题">
+      <el-table-column min-width="300px" label="名称">
         <template slot-scope="scope">
-          <router-link class="link-type" :to="'/article/view/'+scope.row.id">
-            <span>{{ scope.row.title }}</span>
-          </router-link>
+            <span>{{ scope.row.name }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column width="120px" align="center" label="作者">
+      <el-table-column width="120px" align="center" label="数量">
         <template slot-scope="scope">
-          <span>{{ scope.row.author }}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column width="180px" align="center" label="创建时间">
-        <template slot-scope="scope">
-          <span>{{ scope.row.create_time | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column width="180px" align="center" label="更新时间">
-        <template slot-scope="scope">
-          <span>{{ scope.row.update_time | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column width="120px" align="center" label="分类">
-        <template slot-scope="scope">
-          <span>{{ scope.row.catalog }}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column class-name="status-col" label="状态" width="110">
-        <template slot-scope="scope">
-          <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
+          <span>{{ scope.row.amount }}</span>
         </template>
       </el-table-column>
 
@@ -67,7 +41,7 @@
   import {fetchList, deleteArticle} from '@/api/article'
 
   export default {
-    name: 'articleList',
+    name: 'catalogList',
     data() {
       return {
         list: null,
@@ -104,7 +78,7 @@
         })
       },
       deleteArticle(id) {
-        this.$confirm('此操作将永久删除该文章, 是否继续?', '提示', {
+        this.$confirm('此操作将永久删除该分类, 是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'

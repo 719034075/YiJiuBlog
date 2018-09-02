@@ -60,7 +60,7 @@
     title: '', // 文章题目
     content: '', // 文章内容
     abstract: '', // 文章摘要
-    author: '',
+    author: 'Zeu Chan',
     catalog: '',
     id: undefined,
   };

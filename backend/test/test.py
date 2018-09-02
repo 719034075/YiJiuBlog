@@ -1,5 +1,5 @@
-from apps.user.models import User
+from apps.catalog.models import Catalog
 
-user = User.query.filter_by(username='admin').first()
+catalog = Catalog.query.order_by(Catalog.name).all()
 
-print(user)
+print(catalog)
