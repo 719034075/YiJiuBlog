@@ -66,7 +66,7 @@
   };
 
   export default {
-    name: 'articleDetail',
+    name: 'ArticleDetail',
     components: {MarkdownEditor, MDinput, Sticky},
     props: {
       isEdit: {
@@ -98,6 +98,7 @@
         }],
         catalog: [],
         rules: {
+          catalog:[{validator: validateRequire}],
           title: [{validator: validateRequire}],
           content: [{validator: validateRequire}],
         }

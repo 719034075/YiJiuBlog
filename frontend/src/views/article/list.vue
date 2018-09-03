@@ -44,9 +44,9 @@
       <el-table-column align="center" label="操作" width="200">
         <template slot-scope="scope">
           <router-link :to="'/article/edit/'+scope.row.id">
-            <el-button type="primary" size="small" icon="el-icon-edit">Edit</el-button>
+            <el-button type="primary" size="small" icon="el-icon-edit">编辑</el-button>
           </router-link>
-          <el-button type="danger" size="small" icon="el-icon-delete" @click="deleteArticle(scope.row.id)">Delete
+          <el-button type="danger" size="small" icon="el-icon-delete" @click="deleteArticle(scope.row.id)">删除
           </el-button>
         </template>
       </el-table-column>
