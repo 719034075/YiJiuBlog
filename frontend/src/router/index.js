@@ -7,7 +7,7 @@ import Router from 'vue-router'
 Vue.use(Router);
 
 /* Layout */
-import Layout from '../views/layout/Layout'
+import Layout from '@/views/layout/Layout'
 
 /**
  * hidden: true                   if `hidden:true` will not show in the sidebar(default is false)
@@ -22,91 +22,61 @@ import Layout from '../views/layout/Layout'
   }
  **/
 export const constantRouterMap = [
-  {path: '/homepage', component: () => import('@/views/homepage/index'), hidden: true},
-  {path: '/blog', component: () => import('@/views/blog/index'), hidden: true},
-  {path: '/blog/:id', component: () => import('@/views/article/view'), hidden: true },
-  {path: '/login', component: () => import('@/views/login/index'), hidden: true},
-  {path: '/404', component: () => import('@/views/404'), hidden: true},
-
-  {
-    path: '/',
-    component: Layout,
-    redirect: '/dashboard',
-    name: 'Dashboard',
-    hidden: true,
-    children: [{
-      path: 'dashboard',
-      component: () => import('@/views/dashboard/index')
-    }]
-  },
-
-
+    { path: '/homepage', component: () => import('@/views/homepage/index'), hidden: true },
+    { path: '/blog', component: () => import('@/views/blog/index'), hidden: true },
+    { path: '/blog/:id', component: () => import('@/views/article/view'), hidden: true },
+    { path: '/login', component: () => import('@/views/login/index'), hidden: true },
+    { path: '/404', component: () => import('@/views/404'), hidden: true },
+    { path: '/', redirect: '/homepage', component: () => import('@/views/homepage/index'), hidden: true },
 ];
 
 
 export default new Router({
-  // mode: 'history', //后端支持可开
-  scrollBehavior: () => ({y: 0}),
-  routes: constantRouterMap
+    // mode: 'history', //后端支持可开
+    scrollBehavior: () => ({ y: 0 }),
+    routes: constantRouterMap
 })
 
 export const asyncRouterMap = [
-  {
-    path: '/catalog',
-    component: Layout,
-    redirect: '/catalog/list',
-    name: 'catalog',
-    meta: {
-      title: '分类栏',
-      icon: 'catalog'
+    {
+        path: '/dashboard',
+        component: Layout,
+        children: [{
+            path: '',
+            component: () => import('@/views/dashboard/index'),
+            name: 'dashboard',
+            meta: { title: 'dashboard'}
+        }],
+        hidden: true,
     },
-    children: [
-      {
-        path: 'list',
-        component: () => import('@/views/catalog/list'),
-        name: 'catalogList',
-        meta: {title: '分类栏', icon: 'catalog'}
-      }
-    ]
-  },
-  {
-    path: '/article',
-    component: Layout,
-    redirect: '/article/list',
-    name: 'article',
-    meta: {
-      title: '文章栏',
-      icon: 'article'
+    {
+        path: '/catalog',
+        component: Layout,
+        redirect: '/catalog/list',
+        name: 'catalog',
+        meta: {
+            title: '分类栏',
+            icon: 'catalog'
+        },
+        children: [
+            {path: 'list',component: () => import('@/views/catalog/list'),name: 'catalogList',meta: { title: '分类栏', icon: 'catalog' } }
+        ]
     },
-    children: [
-      {
-        path: 'create',
-        component: () => import('@/views/article/create'),
-        name: 'createArticle',
-        meta: {title: '创建文章', icon: 'edit'}
-      },
-      {
-        path: 'edit/:id',
-        component: () => import('@/views/article/edit'),
-        name: 'editArticle',
-        meta: {title: '编辑文章', noCache: true},
-        hidden: true
-      },
-      {
-        path: 'list',
-        component: () => import('@/views/article/list'),
-        name: 'articleList',
-        meta: {title: '文章列表', icon: 'list'}
-      },
-      {
-        path: 'view/:id',
-        component: () => import('@/views/article/view'),
-        name: 'viewArticle',
-        meta: {title: '查看文章', noCache: true},
-        hidden: true
-      },
-    ]
-  },
-  {path: '*', redirect: '/404', hidden: true}
-
+    {
+        path: '/article',
+        component: Layout,
+        redirect: '/article/list',
+        name: 'article',
+        meta: {
+            title: '文章栏',
+            icon: 'article'
+        },
+        children: [
+            {path: 'create',component: () => import('@/views/article/create'),name: 'createArticle',meta: { title: '创建文章', icon: 'edit' } },
+            {path: 'edit/:id',component: () => import('@/views/article/edit'),name: 'editArticle',meta: { title: '编辑文章' },hidden: true },
+            {path: 'list',component: () => import('@/views/article/list'),name: 'articleList',meta: { title: '文章列表', icon: 'list' } },
+            {path: 'view/:id',component: () => import('@/views/article/view'),name: 'viewArticle',meta: { title: '查看文章' },hidden: true },
+        ]
+    },
+    { path: '*', redirect: '/404', hidden: true }
 ];

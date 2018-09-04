@@ -1,9 +1,10 @@
 <template>
   <div>
-    <img class="fl" src="/static/pictures/eggs.svg"/>
+    <img class="fl" src="/src/assets/pictures/eggs.svg"/>
     <h5 class="fl nav">HOME</h5>
     <h5 class="fl nav">BLOG</h5>
     <h5 class="fl nav">ABOUT</h5>
+
 
     <!--<h1 class="fl title">my tea egg</h1>-->
   </div>
@@ -19,7 +20,7 @@
 <style scoped lang='scss'>
   @font-face {
     font-family: "Futura LT Book";
-    src: url("/static/fonts/Futura_LT_Book.ttf");
+    src: url("/src/assets/fonts/Futura_LT_Book.ttf");
   }
 
   /*.title{*/

@@ -19,9 +19,6 @@
             const id = this.$route.params && this.$route.params.id;
             this.fetchData(id)
         },
-        mounted() {
-            // this.markdown2Html()
-        },
         methods: {
             fetchData(id) {
                 fetchArticle(id).then(response => {

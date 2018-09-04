@@ -18,7 +18,7 @@ class DevConfig(BaseConfig):
     JWT_HEADER_NAME = 'X-TOKEN'
     JWT_HEADER_TYPE = 'Knock'
     JWT_BLACKLIST_ENABLED = True
-    JWT_ACCESS_TOKEN_EXPIRES = False
+    # JWT_ACCESS_TOKEN_EXPIRES = False
 
     # Swagger settings
     SWAGGER = {
