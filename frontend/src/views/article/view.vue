@@ -42,5 +42,10 @@
 </script>
 
 <style scoped>
-
+    .components-container{
+        margin: 0 auto;
+        padding: 0;
+        width: 100%;
+        max-width: 900px;
+    }
 </style>

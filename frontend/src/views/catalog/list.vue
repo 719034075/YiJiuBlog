@@ -150,7 +150,7 @@
                             type: obj.type,
                             duration: 2000
                         });
-                        location.reload()
+                        this.getList()
                     }).catch(err => {
                         console.log(err);
                     });
@@ -163,11 +163,18 @@
                     type: 'warning'
                 }).then(() => {
                     deleteCatalog(id).then(response => {
-                        this.$message({
-                            type: 'success',
-                            message: response.data.message
-                        });
-                        location.reload()
+                        if(response.success){
+                            this.$message({
+                                type: 'success',
+                                message: response.message
+                            });
+                        }else {
+                            this.$message({
+                                type: 'warning',
+                                message: response.message
+                            });
+                        }
+                        this.getList();
                     }).catch(err => {
                         console.log(err)
                     })

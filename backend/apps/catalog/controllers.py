@@ -2,6 +2,7 @@ from flask import Blueprint
 from flask_restful import Resource, Api, reqparse
 from flask_jwt_extended import jwt_required
 
+from apps.article.models import Article
 from utils.json_serialize import list_json_serialize
 from utils.response_bean import ResponseBean
 from utils.protect_restful import requires_roles
@@ -25,6 +26,10 @@ class Create(Resource):
         args = self.parser.parse_args()
         name = args['name']
 
+        if name == "默认":
+            response = ResponseBean().get_fail_instance()
+            response.message = '默认Catalog不可新建'
+            return response.__dict__
         new_catalog = Catalog(name=name)
         db.session.add(new_catalog)
         db.session.commit()
@@ -40,6 +45,16 @@ class Delete(Resource):
     @requires_roles('superuser')
     def get(self, id):
         delete_catalog = Catalog.query.get(id)
+        default_catalog = Catalog.query.filter_by(name="默认").first()
+        if delete_catalog.name == "默认":
+            response = ResponseBean().get_fail_instance()
+            response.message = '默认Catalog不可删除'
+            return response.__dict__
+        articles = Article.query.filter_by(catalog=id)
+
+        for article in articles:
+            article.catalog = default_catalog.id
+        default_catalog.amount = default_catalog.amount + delete_catalog.amount
         db.session.delete(delete_catalog)
         db.session.commit()
 

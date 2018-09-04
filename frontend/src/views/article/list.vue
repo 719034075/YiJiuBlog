@@ -114,7 +114,7 @@
               type: 'success',
               message: '删除成功!'
             });
-            location.reload()
+              this.getList()
           }).catch(err => {
             console.log(err)
           })

@@ -45,3 +45,11 @@ export function deleteArticle(id){
     method: 'get',
   })
 }
+
+export function fetchPublishedList(data) {
+    return request({
+        url: '/article/list/published',
+        method: 'post',
+        data
+    })
+}
