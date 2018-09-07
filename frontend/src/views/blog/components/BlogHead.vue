@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img class="fl" src="/src/assets/pictures/eggs.svg"/>
+    <img class="fl" :src="egg"/>
     <h5 class="fl nav">HOME</h5>
     <h5 class="fl nav">BLOG</h5>
     <h5 class="fl nav">ABOUT</h5>
@@ -11,9 +11,12 @@
 </template>
 
 <script>
+  import egg from '@/assets/pictures/eggs.svg'
     export default {
         name: "blog-head",
-        data: () => ({}),
+        data: () => ({
+          egg
+        }),
     }
 </script>
 
