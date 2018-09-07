@@ -9,7 +9,7 @@ class DevConfig(BaseConfig):
 
     # MySQL connection
     SQLALCHEMY_TRACK_MODIFICATIONS = True
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:center135@localhost:3306/yijiublog'
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://temp:temp@localhost:3306/temp'
     SQLALCHEMY_NATIVE_UNICODE = 'utf8'
 
     # Safe settings
