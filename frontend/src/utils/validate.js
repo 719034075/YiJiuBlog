@@ -31,3 +31,8 @@ export function validatAlphabets(str) {
   return reg.test(str)
 }
 
+/* 大小写字母*/
+export function validatBlogURL(str) {
+  const reg = /^\/blog\/[a-zA-Z0-9\-]+$/;
+  return reg.test(str)
+}

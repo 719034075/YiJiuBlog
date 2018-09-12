@@ -108,8 +108,6 @@ class Update(Resource):
 
 
 class Detail(Resource):
-    @jwt_required
-    @requires_roles('superuser')
     def get(self, id):
         find_article = Article.query.get(id)
 

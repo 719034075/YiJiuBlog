@@ -1,11 +1,13 @@
 <template>
-  <div>
+  <div class="blog-head">
     <img class="fl" :src="egg"/>
-    <h5 class="fl nav">HOME</h5>
-    <h5 class="fl nav">BLOG</h5>
+    <h5 class="fl nav">
+      <router-link to="/homepage">HOME</router-link>
+    </h5>
+    <h5 class="fl nav">
+      <router-link to="/blog">BLOG</router-link>
+      </h5>
     <h5 class="fl nav">ABOUT</h5>
-
-
     <!--<h1 class="fl title">my tea egg</h1>-->
   </div>
 </template>
@@ -23,13 +25,12 @@
 <style scoped lang='scss'>
   @font-face {
     font-family: "Futura LT Book";
-    src: url("/src/assets/fonts/Futura_LT_Book.ttf");
+    src: url("../../../assets/fonts/FuturaLT-Book.otf") format('truetype');
   }
 
-  /*.title{*/
-    /*font-family: "Futura LT Book", "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;*/
-    /*color: #2F2E2E;*/
-  /*}*/
+  .blog-head{
+    height: 75px;
+  }
 
   .fl{
     float: left;
