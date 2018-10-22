@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from config.dev_config import DevConfig
+from config.prod_config import ProdConfig
 from extensions import db, cors, jwt
 from apps.user.controllers import user
 from apps.article.controllers import article
@@ -13,7 +13,7 @@ def create_app():
                 template_folder="../dist")
 
     # Set the project's config.
-    app.config.from_object(DevConfig)
+    app.config.from_object(ProdConfig)
 
     # Register blueprint
     app.register_blueprint(user)

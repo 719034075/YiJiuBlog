@@ -9,7 +9,7 @@ class ProdConfig(BaseConfig):
 
     # MySQL connection
     SQLALCHEMY_TRACK_MODIFICATIONS = True
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://temp:temp@localhost:3306/temp'
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:center135@localhost:3306/eggblog'
     SQLALCHEMY_NATIVE_UNICODE = 'utf8'
 
     # Safe settings

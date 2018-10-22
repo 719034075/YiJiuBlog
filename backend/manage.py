@@ -41,7 +41,7 @@ def dropall():
 # 创建admin用户，赋予superuser角色
 @manager.command
 def initrole():
-    db.session.add(User(username="temp-admin", password="temp-pwd", roles='superuser'))
+    db.session.add(User(username="ZeuChan", password="Knockthedoor", roles='superuser'))
     db.session.commit()
     print("Roles added!")
 
