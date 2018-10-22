@@ -28,7 +28,7 @@
 
   @font-face {
     font-family: "Zorus Serif";
-    src: url("/src/assets/fonts/Zorus_Serif.otf");
+    src: url("../../assets/fonts/Zorus_Serif.otf");
   }
 
   $gray: #DDD;

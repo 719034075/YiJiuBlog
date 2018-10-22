@@ -1,7 +1,7 @@
 <template>
     <div class="blog-page">
         <blog-head></blog-head>
-        <div v-loading.body="listLoading" >
+        <div v-loading.body="listLoading">
             <card-item v-for="item in list" :key="item.id" :item="item"></card-item>
         </div>
         <el-row class="">
